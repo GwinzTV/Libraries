@@ -39,7 +39,7 @@ class LinkedList:
         self.head = new_node
 
     # time complexity O(n)
-    def add_node_end(self, data):
+    def append(self, data):
         '''
         This method adds a node to the end of the  linked list.
         If there is no node in the list, then the new node will become
