@@ -23,6 +23,22 @@ class SinglyLinkedList:
     '''
     def __init__(self):
         self.head = None
+        self.__length_list = 0
+
+    # getter for the length of the linked list
+    def get_length_list(self):
+        return self.__length_list
+    
+    # setter for length of linked list
+    def set_length_list(self, increment=None):
+        '''
+        This method sets the value of the length of the linked list.
+        '''
+        if increment:
+            self.__length_list += 1
+            return
+        if self.__length_list > 0:
+            self.__length_list -= 1
 
     # time complextity O(1)
     def prepend(self, data):
@@ -32,6 +48,7 @@ class SinglyLinkedList:
         will become the first node in the list.
         '''
         new_node = Node(data)
+        self.set_length_list(1)
         if not self.head:
             self.head = new_node
             return
@@ -46,6 +63,7 @@ class SinglyLinkedList:
         the first node in the list.
         '''
         new_node = Node(data)
+        self.set_length_list(1)
         if not self.head:
             self.head = new_node
             return
@@ -54,31 +72,73 @@ class SinglyLinkedList:
             last = last.next
         last.next = new_node
     
-
+    # time complexity O(n)
     def delete(self, data=None):
         '''
         This method deletes your chosen node, and if no node is specified,
         by default it will delete the last node in the list.
         '''
         current = self.head
+        self.set_length_list()
+        length = self.get_length_list()
+        prev = None
         # no data specified, so delete last node
         if data == None:
-            while current.next.next:
+            while current and current.next:
+                prev = current
                 current = current.next
-            current.next = None
+            if length > 1:
+                prev.next = None
+            else:
+                self.head = None
+                print('Linked List is empty!')
             return
         # when data is specified
         while current.next.data != data:
             current = current.next
-        current.next = None
+        current.next = current.next.next
     
-
+    # time complexity O(n)
     def print_list(self):
         '''
         This method prints out the entire linked list
         (stretch goal: add slicing functionality)
         '''
+        current = self.head
+        if current:
+            linked_list = ''
+            while current:
+                linked_list += str(current.data) + ' --> '
+                current = current.next
+            print(linked_list[0:-5])
+    
+
+    def search(self, index):
+        '''
+        This method takes an input index value and returns
+        the data stored at that "index" in the linked list.
+        '''
+        current = self.head
         pass
+
+
+
+# # manual testing
+# ll = SinglyLinkedList()
+# print(ll.get_length_list())
+# for i in range(2):
+#     ll.append(i)
+# print(ll.get_length_list())
+# ll.print_list()
+# ll.delete()
+# print(ll.get_length_list())
+# ll.print_list()
+# ll.delete()
+# print(ll.get_length_list())
+# ll.print_list()
+
+
+
 
 
 
