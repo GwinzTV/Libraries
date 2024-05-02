@@ -10,13 +10,13 @@ comment where I can. I hope you find ease in its use!
 '''
 
 # node for building a singley linked list
-class Node():
+class Node:
     def __init__(self, data):
         self.data = data
         self.next = None
 
 # linked list class
-class LinkedList():
+class LinkedList:
     def __init__(self):
         self.head = None
 
