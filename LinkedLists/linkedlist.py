@@ -15,7 +15,7 @@ class Node:
         self.data = data
         self.next = None
 
-# linked list class
+# singly linked list class
 class SinglyLinkedList:
     '''
     This linked list class contains a variety of standard list manipulation/querying methods
@@ -53,10 +53,36 @@ class SinglyLinkedList:
         while last.next:
             last = last.next
         last.next = new_node
+    
+
+    def delete(self, data=None):
+        '''
+        This method deletes your chosen node, and if no node is specified,
+        by default it will delete the last node in the list.
+        '''
+        current = self.head
+        # no data specified, so delete last node
+        if data == None:
+            while current.next.next:
+                current = current.next
+            current.next = None
+            return
+        # when data is specified
+        while current.next.data != data:
+            current = current.next
+        current.next = None
+    
+
+    def print_list(self):
+        '''
+        This method prints out the entire linked list
+        (stretch goal: add slicing functionality)
+        '''
+        pass
 
 
 
-
+# doubly linked list class
 class DoublyLinkedList:
     '''
     This linked list class contains a variety of standard list manipulation/querying methods
