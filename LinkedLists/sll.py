@@ -1,7 +1,7 @@
 '''
 This library seamlessly allows you to create singly linked lists!!!
 I have made sure to make this library and its methods easy to understand by adding
-comment where I can. I hope you find ease in its use!
+comments and descriptive notes where I can. I hope you find ease in its use!
 
         ==============================
         |==       DEVELOPER:       ==|
@@ -54,4 +54,18 @@ class LinkedList:
             last = last.next
         last.next = new_node
 
-    
+
+
+
+
+        
+#         ========================================================
+#         |==     I hope this Library has served you well!     ==|
+#         |==      Please Leave feedback for improvements      ==|
+#         |==    Your feedback will will help me improve on    ==|
+#         |==                future projects.                  ==|
+#         |==                                                  ==|
+#         |==          Why not check out my Github:            ==|
+#         |==           https://github.com/GwinzTV             ==|
+#         |==                                                  ==|
+#         ========================================================
