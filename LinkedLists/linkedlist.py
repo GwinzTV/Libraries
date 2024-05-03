@@ -9,8 +9,8 @@ comments and descriptive notes where I can. I hope you find ease in its use!
         ==============================
 '''
 
-# node for building a singly linked list
-class Node:
+# private node for building a singly linked list
+class _Node:
     def __init__(self, data):
         self.data = data
         self.next = None
@@ -23,11 +23,11 @@ class SinglyLinkedList:
     '''
     def __init__(self):
         self.head = None
-        self.__length_list = 0
+        self._length_list = 0
 
     # getter for the length of the linked list
     def get_length_list(self):
-        return self.__length_list
+        return self._length_list
     
     # setter for length of linked list
     def set_length_list(self, increment=None):
@@ -35,68 +35,65 @@ class SinglyLinkedList:
         This method sets the value of the length of the linked list.
         '''
         if increment:
-            self.__length_list += 1
+            self._length_list += 1
             return
-        if self.__length_list > 0:
-            self.__length_list -= 1
+        if self._length_list > 0:
+            self._length_list -= 1
 
     # time complextity O(1)
     def prepend(self, data):
         '''
-        This method adds a new node to the beginning of the linked list.
-        If there is no node at the beginning of the list, then the new node
-        will become the first node in the list.
+        This method adds a new _node to the beginning of the linked list.
+        If there is no _node at the beginning of the list, then the new _node
+        will become the first _node in the list.
         '''
-        new_node = Node(data)
+        new__node = _Node(data)
         self.set_length_list(1)
         if not self.head:
-            self.head = new_node
+            self.head = new__node
             return
-        new_node.next = self.head
-        self.head = new_node
+        new__node.next = self.head
+        self.head = new__node
 
     # time complexity O(n)
-    def append(self, data):
+    def append(self, data, index = None):
         '''
-        This method adds a node to the end of the  linked list.
-        If there is no node in the list, then the new node will become
-        the first node in the list.
+        This method adds a _node to the end of the  linked list.
+        If there is no _node in the list, then the new _node will become
+        the first _node in the list.
         '''
-        new_node = Node(data)
+        new__node = _Node(data)
         self.set_length_list(1)
         if not self.head:
-            self.head = new_node
+            self.head = new__node
             return
         last = self.head
         while last.next:
             last = last.next
-        last.next = new_node
+        last.next = new__node
     
     # time complexity O(n)
-    def delete(self, data=None):
+    def delete(self, data):
         '''
-        This method deletes your chosen node, and if no node is specified,
-        by default it will delete the last node in the list.
+        This method deletes your chosen _node from the list.
         '''
         current = self.head
         self.set_length_list()
-        length = self.get_length_list()
+        if current and current.data == data:
+            self.head = current.next
+            deleted = current.data
+            current = None
+            return deleted
         prev = None
-        # no data specified, so delete last node
-        if data == None:
-            while current and current.next:
-                prev = current
-                current = current.next
-            if length > 1:
-                prev.next = None
-            else:
-                self.head = None
-                print('Linked List is empty!')
-            return
-        # when data is specified
-        while current.next.data != data:
+        while current and current.data != data:
+            prev = current
             current = current.next
-        current.next = current.next.next
+        if current != None:
+            prev.next = current.next
+            deleted = current.data
+            current = None
+            return deleted
+        print(f'{data} is not in the linked list!')
     
     # time complexity O(n)
     def print_list(self):
@@ -111,31 +108,27 @@ class SinglyLinkedList:
                 linked_list += str(current.data) + ' --> '
                 current = current.next
             print(linked_list[0:-5])
+        else:
+            print('Linked list is empty!')
     
-
-    def search(self, index):
+    # time complexity O(n)
+    def search(self, value):
         '''
-        This method takes an input index value and returns
-        the data stored at that "index" in the linked list.
+        This method takes an input value and returns
+        the index that the data is stored in the linked list.
         '''
         current = self.head
-        pass
+        if current:
+            index = 0
+            if current.data == value:
+                return f'{value} is found at index: {index}'
+            while current and current.data != value:
+                current = current.next
+                index += 1
+            if current:
+                return f'{value} is found at index: {index}'
+            return f'{value} is not in the list!'
 
-
-
-# # manual testing
-# ll = SinglyLinkedList()
-# print(ll.get_length_list())
-# for i in range(2):
-#     ll.append(i)
-# print(ll.get_length_list())
-# ll.print_list()
-# ll.delete()
-# print(ll.get_length_list())
-# ll.print_list()
-# ll.delete()
-# print(ll.get_length_list())
-# ll.print_list()
 
 
 
